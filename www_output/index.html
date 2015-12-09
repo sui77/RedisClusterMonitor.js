@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>redis cluster monitor</title>
+    <style>
+        body {
+            background-color:#000;
+            color:#fff;
+            font-family:Courier,serif;
+            font-size:14px;
+            font-weight:bold;
+        }
+
+    </style>
+    <meta charset="utf-8"/>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+
+        $(function() {
+            myIo = io();
+
+            myIo.on('connect', function(p) {
+                $('#connecting').remove();
+            })
+
+            myIo.on('msg', function(p) {
+                $('#messages').append('<li style="color:' + p.color + '">' + p.msg + '</li>');
+                $("html, body").scrollTop( $(document).height() );
+            })
+
+        });
+    </script>
+</head>
+<body>
+
+<div >
+    <div id="connecting">
+    connecting...
+    </div>
+
+    <ul id="messages">
+    </ul>
+</div>
+
+</body>
+</html>
